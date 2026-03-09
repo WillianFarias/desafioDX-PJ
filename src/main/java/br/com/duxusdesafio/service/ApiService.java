@@ -17,8 +17,10 @@ public class ApiService {
      * Vai retornar um Time, com a composição do time daquela data
      */
     public Time timeDaData(LocalDate data, List<Time> todosOsTimes){
-        // TODO Implementar método seguindo as instruções!
-        return null;
+        return todosOsTimes.stream()
+            .filter(t -> t.getData().equals(data))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
