@@ -75,8 +75,14 @@ public class ApiService {
      * Vai retornar a função mais comum nos times dentro do período
      */
     public String funcaoMaisComum(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        // TODO Implementar método seguindo as instruções!
-        return null;
+        return filtrarPorData(dataInicial, dataFinal, todosOsTimes).stream()
+            .flatMap(t -> t.getComposicoes().stream())
+            .map(c -> c.getIntegrante().getFuncao())
+            .collect(Collectors.groupingBy(f -> f, Collectors.counting()))
+            .entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse(null);
     }
 
     /**
