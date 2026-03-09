@@ -20,7 +20,7 @@ Este projeto é uma solução para o desafio técnico de desenvolvimento de um s
 
 ---
 
-## 🛠️ Como Executar o Projeto
+## Como Executar o Projeto
 
 ### 1. Pré-requisitos
 - JDK 1.8 instalado
@@ -56,7 +56,7 @@ Este projeto é uma solução para o desafio técnico de desenvolvimento de um s
 
 ---
 
-## 🧪 Como Testar a Implementação
+## Como Testar a Implementação
 
 ### Testes Unitários (Backend)
 Para validar as regras de negócio e o processamento de dados via Java Streams, execute:
@@ -112,7 +112,7 @@ Na aba **Dashboard**:
 
 ---
 
-## 📌 Considerações Técnicas
+## Considerações Técnicas
 - **Processamento em Memória**: Conforme solicitado, toda a lógica de agregação e contagem de dados foi implementada utilizando **Java 8 Streams API**, garantindo que o banco de dados seja utilizado apenas para a recuperação bruta dos dados (`findAll`).
 - **Injeção de Dependência**: Foi utilizada a injeção via construtor em todos os componentes Spring, seguindo as melhores práticas de testabilidade e clareza de dependências.
 - **CORS**: O backend está configurado para aceitar requisições da origem `http://localhost:4200`, permitindo a integração com o frontend Angular.
