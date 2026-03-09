@@ -6,6 +6,7 @@ import br.com.duxusdesafio.model.Time;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -48,8 +49,26 @@ public class ApiService {
      * dentro do período
      */
     public List<String> integrantesDoTimeMaisComum(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        // TODO Implementar método seguindo as instruções!
-        return null;
+        List<Time> filtrados = filtrarPorData(dataInicial, dataFinal, todosOsTimes);
+
+        // Agrupa times pela composição de IDs de integrantes (ordenados para garantir igualdade)
+        Map<String, Long> contagemComposicao = filtrados.stream()
+            .map(this::gerarChaveComposicao)
+            .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+
+        String chaveMaisComum = contagemComposicao.entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse("");
+
+        // Retorna os nomes dos integrantes daquela composição
+        return filtrados.stream()
+            .filter(t -> gerarChaveComposicao(t).equals(chaveMaisComum))
+            .findFirst()
+            .map(t -> t.getComposicoes().stream()
+                .map(c -> c.getIntegrante().getNome())
+                .collect(Collectors.toList()))
+            .orElse(Collections.emptyList());
     }
 
     /**
@@ -88,8 +107,15 @@ public class ApiService {
     // Métodos auxiliares privados
     private List<Time> filtrarPorData(LocalDate inicio, LocalDate fim, List<Time> times) {
         return times.stream()
-                .filter(t -> (inicio == null || !t.getData().isBefore(inicio)) &&
-                        (fim == null || !t.getData().isAfter(fim)))
-                .collect(Collectors.toList());
+            .filter(t -> (inicio == null || !t.getData().isBefore(inicio)) &&
+                    (fim == null || !t.getData().isAfter(fim)))
+            .collect(Collectors.toList());
+    }
+
+    private String gerarChaveComposicao(Time t) {
+        return t.getComposicoes().stream()
+            .map(c -> c.getIntegrante().getId().toString())
+            .sorted()
+            .collect(Collectors.joining("-"));
     }
 }
