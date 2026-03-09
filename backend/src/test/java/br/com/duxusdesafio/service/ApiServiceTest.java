@@ -3,8 +3,8 @@ package br.com.duxusdesafio.service;
 import br.com.duxusdesafio.model.ComposicaoTime;
 import br.com.duxusdesafio.model.Integrante;
 import br.com.duxusdesafio.model.Time;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class ApiServiceTest {
     private List<Time> todosOsTimes;
     private Integrante i1, i2, i3;
 
-    @Before
+    @BeforeEach
     public void setup() {
         apiService = new ApiService();
 
