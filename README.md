@@ -2,7 +2,7 @@
 
 Este projeto é uma solução para o desafio técnico de desenvolvimento de um sistema de escalação de times, permitindo o cadastro de integrantes, montagem de times semanais e análise de dados estatísticos.
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 - **Java 8** com **Spring Boot 2.5.3**
@@ -66,13 +66,53 @@ cd backend
 ```
 
 ### Fluxo de Teste Manual (Frontend)
-1. **Cadastro de Integrantes**: Vá na aba "Integrantes" e cadastre alguns personagens (ex: Nome: Bangalore, Franquia: Apex Legends, Função: Ofensivo).
-2. **Montagem de Time**: Vá na aba "Montar Time", selecione uma data e marque os integrantes que farão parte daquela escala.
-3. **Dashboard**: Na tela inicial (Dashboard), utilize os filtros de data para visualizar as estatísticas processadas em tempo real pelo backend.
+
+#### 1. Cadastro de Integrantes (Massa de Dados Exemplo)
+Cadastre pelo menos os seguintes integrantes na tela **Integrantes**:
+
+1. Nome: `Bangalore`, Franquia: `Apex Legends`, Função: `Ofensivo`
+2. Nome: `Bloodhound`, Franquia: `Apex Legends`, Função: `Reconhecimento`
+3. Nome: `Tracer`, Franquia: `Overwatch`, Função: `Dano`
+4. Nome: `Mercy`, Franquia: `Overwatch`, Função: `Suporte`
+5. Nome: `Gibraltar`, Franquia: `Apex Legends`, Função: `Defensivo`
+
+Após salvar, verifique se cada integrante aparece na "Lista de Integrantes".
+
+#### 2. Montagem de Times
+Na aba **Montar Time**, utilize a massa de dados cadastral para criar pelo menos 3 times:
+
+- **Time A** 
+  Data: `2024-01-01` 
+  Integrantes: `Bangalore`, `Bloodhound`
+
+- **Time B** 
+  Data: `2024-01-15` 
+  Integrantes: `Bangalore`, `Tracer`
+
+- **Time C** 
+  Data: `2024-02-01` 
+  Integrantes: `Tracer`, `Mercy`
+
+Após salvar, verifique se os cards de times aparecem na parte inferior da tela com a data e a lista de integrantes correta.
+
+#### 3. Dashboard de Consultas
+Na aba **Dashboard**:
+
+- Sem preencher datas (período completo), clique em **Filtrar Resultados** e observe:
+  - **Integrante Mais Usado**: deverá ser `Bangalore` ou `Tracer` (ambos aparecem em 2 times).
+  - **Função Mais Comum**: refletirá a função com maior número de aparições nas composições.
+  - **Contagem por Franquia**: deverá contabilizar quantas vezes cada franquia aparece nos times.
+
+- Informe **Data Inicial** `2024-01-01` e **Data Final** `2024-01-31` e clique em **Filtrar Resultados**:
+  - Somente os times A e B (de janeiro) serão considerados.
+  - O **Integrante Mais Usado** deverá ser `Bangalore` (presente nos dois times de janeiro).
+
+- Informe um período sem times (por exemplo, ano de 2023) e clique em **Filtrar Resultados**:
+  - Os cards deverão indicar ausência de dados ("Nenhum" / "Nenhuma") e as contagens ficarão vazias.
 
 ---
 
 ## 📌 Considerações Técnicas
 - **Processamento em Memória**: Conforme solicitado, toda a lógica de agregação e contagem de dados foi implementada utilizando **Java 8 Streams API**, garantindo que o banco de dados seja utilizado apenas para a recuperação bruta dos dados (`findAll`).
 - **Injeção de Dependência**: Foi utilizada a injeção via construtor em todos os componentes Spring, seguindo as melhores práticas de testabilidade e clareza de dependências.
-- **CORS**: O backend está configurado para aceitar requisições da origem `http://localhost:4200`.
+- **CORS**: O backend está configurado para aceitar requisições da origem `http://localhost:4200`, permitindo a integração com o frontend Angular.
