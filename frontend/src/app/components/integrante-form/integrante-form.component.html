@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h3>Cadastro de Integrantes</h3>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="card p-4 shadow-sm mb-4">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" formControlName="nome" class="form-control" placeholder="Ex: Bangalore">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Franquia</label>
+        <input type="text" formControlName="franquia" class="form-control" placeholder="Ex: Apex Legends">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Função</label>
+        <input type="text" formControlName="funcao" class="form-control" placeholder="Ex: Ofensivo">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salvar Integrante</button>
+  </form>
+
+  <h4>Lista de Integrantes</h4>
+  <table class="table table-striped border">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Franquia</th>
+        <th>Função</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of integrantes">
+        <td>{{ i.id }}</td>
+        <td>{{ i.nome }}</td>
+        <td>{{ i.franquia }}</td>
+        <td>{{ i.funcao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
