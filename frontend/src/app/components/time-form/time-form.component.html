@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h3>Montagem de Time</h3>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="card p-4 shadow-sm mb-4">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Data da Escalação</label>
+        <input type="date" formControlName="data" class="form-control">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Selecione os Integrantes:</label>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let integrante of integrantesDisponiveis">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox"
+                   [value]="integrante.id"
+                   (change)="onCheckboxChange($event)">
+            <label class="form-check-label">
+              {{ integrante.nome }} ({{ integrante.funcao }})
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+      <i class="bi bi-check-circle"></i> Salvar Time
+    </button>
+  </form>
+
+  <h4>Times Escalados</h4>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let time of timesCadastrados">
+      <div class="card border-primary">
+        <div class="card-header bg-primary text-white">
+          Data: {{ time.data | date:'dd/MM/yyyy' }}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let comp of time.composicoes">
+            {{ comp.integrante.nome }} - <small class="text-muted">{{ comp.integrante.funcao }}</small>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
