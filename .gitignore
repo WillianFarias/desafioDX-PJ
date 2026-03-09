@@ -1,0 +1,40 @@
+# --- GERAL (IDE e SO) ---
+.idea/
+.vscode/
+*.iws
+*.iml
+*.ipr
+/shelf/
+/workspace.xml
+.settings/
+.project
+.classpath
+.metadata/
+.DS_Store
+Thumbs.db
+*.log
+temp/
+tmp/
+
+# --- BACKEND (Java/Maven) ---
+backend/target/
+backend/bin/
+backend/out/
+backend/*.h2.db
+backend/.mvn/timing.properties
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/dependency-reduced-pom.xml
+
+# --- FRONTEND (Angular/Node) ---
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.cache/
+frontend/npm-debug.log*
+frontend/yarn-error.log*
+frontend/.editorconfig
+frontend/.browserslistrc
+
+# --- BANCO DE DATOS ---
+/dataSources/
+/dataSources.local.xml
