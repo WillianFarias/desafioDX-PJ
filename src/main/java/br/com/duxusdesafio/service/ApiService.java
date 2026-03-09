@@ -89,8 +89,14 @@ public class ApiService {
      * Vai retornar o nome da Franquia mais comum nos times dentro do período
      */
     public String franquiaMaisFamosa(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes) {
-        // TODO Implementar método seguindo as instruções!
-        return null;
+        return filtrarPorData(dataInicial, dataFinal, todosOsTimes).stream()
+            .flatMap(t -> t.getComposicoes().stream())
+            .map(c -> c.getIntegrante().getFranquia())
+            .collect(Collectors.groupingBy(f -> f, Collectors.counting()))
+            .entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse(null);
     }
 
 
