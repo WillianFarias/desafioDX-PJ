@@ -2,7 +2,6 @@ package br.com.duxusdesafio.controller;
 
 import br.com.duxusdesafio.model.Integrante;
 import br.com.duxusdesafio.repository.IntegranteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @RequestMapping("/api/integrantes")
 public class IntegranteController {
 
-    @Autowired
     private IntegranteRepository integranteRepository;
+
+    public IntegranteController(IntegranteRepository integranteRepository) {
+        this.integranteRepository = integranteRepository;
+    }
 
     @GetMapping
     public List<Integrante> listarTodos() {

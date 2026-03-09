@@ -6,7 +6,6 @@ import br.com.duxusdesafio.model.Integrante;
 import br.com.duxusdesafio.model.Time;
 import br.com.duxusdesafio.repository.IntegranteRepository;
 import br.com.duxusdesafio.repository.TimeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +16,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/times")
 public class TimeController {
 
-    @Autowired
     private TimeRepository timeRepository;
-
-    @Autowired
     private IntegranteRepository integranteRepository;
+
+    public TimeController(TimeRepository timeRepository, IntegranteRepository integranteRepository) {
+        this.timeRepository = timeRepository;
+        this.integranteRepository = integranteRepository;
+    }
 
     @GetMapping
     public List<Time> listarTodos() {
