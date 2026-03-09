@@ -1,0 +1,79 @@
+<div class="container mt-4">
+  <h3 class="mb-4"><i class="bi bi-graph-up"></i> Dashboard de Consultas</h3>
+
+  <!-- Filtros -->
+  <div class="card p-3 mb-4 bg-light shadow-sm">
+    <div class="row align-items-end">
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Data Inicial</label>
+        <input type="date" [(ngModel)]="dataInicio" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Data Final</label>
+        <input type="date" [(ngModel)]="dataFim" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-primary w-100" (click)="atualizarConsultas()">
+          <i class="bi bi-search"></i> Filtrar Resultados
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Destaques -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card text-center border-primary h-100 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">Integrante Mais Usado</h6>
+          <h4 class="card-title text-primary">{{ integranteMaisUsado?.nome || 'Nenhum' }}</h4>
+          <p class="small">{{ integranteMaisUsado?.franquia }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center border-success h-100 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">Função Mais Comum</h6>
+          <h4 class="card-title text-success">{{ funcaoMaisComum || 'Nenhuma' }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center border-info h-100 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">Franquia Mais Famosa</h6>
+          <h4 class="card-title text-info">{{ franquiaMaisFamosa || 'Nenhuma' }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabelas de Contagem -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">Contagem por Franquia</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let entry of getEntries(contagemFranquia)">
+            {{ entry[0] }}
+            <span class="badge bg-primary rounded-pill">{{ entry[1] }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">Contagem por Função</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let entry of getEntries(contagemFuncao)">
+            {{ entry[0] }}
+            <span class="badge bg-success rounded-pill">{{ entry[1] }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
