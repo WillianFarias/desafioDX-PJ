@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/times")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TimeController {
 
     private TimeRepository timeRepository;

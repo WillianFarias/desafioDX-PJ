@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/integrantes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class IntegranteController {
 
     private IntegranteRepository integranteRepository;
