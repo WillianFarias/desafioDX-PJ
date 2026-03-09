@@ -113,8 +113,10 @@ public class ApiService {
      * Vai retornar o número (quantidade) de Funções dentro do período
      */
     public Map<String, Long> contagemPorFuncao(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        // TODO Implementar método seguindo as instruções!
-        return null;
+        return filtrarPorData(dataInicial, dataFinal, todosOsTimes).stream()
+            .flatMap(t -> t.getComposicoes().stream())
+            .map(c -> c.getIntegrante().getFuncao())
+            .collect(Collectors.groupingBy(f -> f, Collectors.counting()));
     }
 
     // Métodos auxiliares privados
